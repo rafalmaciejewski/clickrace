@@ -1,0 +1,14 @@
+export const JOIN = 'join';
+export const JOINED = 'joined';
+export const PLAYER_JOINED = 'player-joined';
+export const PLAYER_QUIT = 'player-quit';
+export const ASSIGN_ADMIN_ROLE = 'assign-admin-role';
+export const START_RACE = 'start-race';
+export const RESTART_RACE = 'restart-race';
+export const JOIN_FAIL = 'join-fail';
+export const SET_SCORES = 'set-scores';
+export const SET_RACE_STATE = 'set-race-state';
+export const RACE_INITIALIZED = 'race-initialized';
+export const RACE_STARTED = 'race-started';
+export const RACE_FINISHED = 'race-finished';
+export const RACE_RESTARTED = 'race-restarted';

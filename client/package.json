@@ -1,0 +1,28 @@
+{
+  "name": "clickrace-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "classnames": "^2.3.1",
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-countdown": "^2.3.2",
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.5",
+    "redux": "^4.1.1",
+    "redux-logger": "^3.0.6",
+    "socket.io-client": "^4.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.30",
+    "@types/redux-logger": "^3.0.9",
+    "typescript": "4.4.4"
+  }
+}
