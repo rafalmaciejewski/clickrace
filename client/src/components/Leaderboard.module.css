@@ -1,0 +1,9 @@
+.leaderboard {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.metric {
+    font-size: .69rem;
+    color: #999;
+}

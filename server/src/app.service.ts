@@ -4,7 +4,7 @@ import { Socket } from 'socket.io';
 import { AppGateway } from './app.gateway';
 import { RaceStatus } from './types';
 
-const SCORE_SYNC_INTERVAL = 1000;
+const SCORE_SYNC_INTERVAL = 500;
 const RACE_DURATION = 60000;
 const RACE_START_TIMEOUT = 5000;
 
@@ -17,8 +17,9 @@ export class AppService {
   private race: RaceStatus = {
     finished: false,
     initialized: false,
-    startDate: null,
     started: false,
+    startDate: null,
+    finishDate: null,
   };
 
   constructor(
@@ -84,8 +85,10 @@ export class AppService {
     const now = Date.now();
     this.race.initialized = true;
     this.race.startDate = now + RACE_START_TIMEOUT;
+    this.race.finishDate = now + RACE_START_TIMEOUT + RACE_DURATION;
     this.gateway.server.emit('race-initialized', {
       startDate: this.race.startDate,
+      finishDate: this.race.finishDate,
     });
     this.schedulerRegistry.addTimeout(
       'start-timeout',
@@ -118,8 +121,9 @@ export class AppService {
     this.race = {
       finished: false,
       initialized: false,
-      startDate: null,
       started: false,
+      startDate: null,
+      finishDate: null,
     };
     this.scores.clear();
     this.gateway.server.emit('race-restarted');
@@ -149,6 +153,3 @@ export class AppService {
       {},
     );
 }
-
-1634490942192;
-1634490947182;

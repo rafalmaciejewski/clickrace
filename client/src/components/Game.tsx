@@ -6,6 +6,7 @@ import { getPlayer, getRaceState } from '../selectors';
 import GameSettings from './GameSettings';
 import Race from './Race';
 import { RegistrationForm } from './RegistrationForm';
+import styles from './Game.module.css';
 
 export default function Game(): JSX.Element {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export default function Game(): JSX.Element {
   }
 
   return (
-    <div>
+    <div className={styles.gameContainer}>
       <RegistrationForm />
       {isAdmin && <GameSettings />}
     </div>

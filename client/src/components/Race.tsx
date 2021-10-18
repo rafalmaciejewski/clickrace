@@ -1,10 +1,11 @@
-/* eslint-disable react/jsx-no-bind */
-import React, { useState } from 'react';
+/* eslint-disable react/jsx-no-bind,@typescript-eslint/no-magic-numbers */
+import React from 'react';
+import { Button, Typography } from '@mui/material';
 import Countdown from 'react-countdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { restartRace } from '../actions';
 import { getPlayer, getRaceState } from '../selectors';
-import socket from '../socket';
+import Arena from './Arena';
 import { Leaderboard } from './Leaderboard';
 import styles from './Race.module.css';
 
@@ -12,21 +13,15 @@ export default function Race(): JSX.Element {
   const dispatch = useDispatch();
   const { started, finished, startDate } = useSelector(getRaceState);
   const { isAdmin, joined } = useSelector(getPlayer);
-  const [score, setScore] = useState(0);
-
-  function handleClick(): void {
-    socket.emit('click');
-    setScore(score + 1);
-  }
 
   if (finished) {
     return (
-      <div>
-        Race finished!
+      <div className={styles.race}>
+        <Typography marginBottom={1}>Race finished!</Typography>
         {isAdmin && (
-          <button onClick={() => dispatch(restartRace())} type="button">
+          <Button variant="outlined" onClick={() => dispatch(restartRace())} type="button">
             Restart
-          </button>
+          </Button>
         )}
         <Leaderboard />
       </div>
@@ -35,38 +30,38 @@ export default function Race(): JSX.Element {
 
   if (!joined) {
     return (
-      <div>
-        Race in progress...
+      <div className={styles.race}>
+        <Typography marginBottom={1}>Race in progress...</Typography>
         <Leaderboard />
       </div>
     );
   }
 
   return (
-    <div>
+    <div className={styles.race}>
       {started ? (
         <React.Fragment>
-          <button className={styles.clickHere} type="button" onClick={handleClick}>
-            Click here!
-          </button>
-          <div>Result: {score}</div>
+          <Arena />
+          <Leaderboard />
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div>Get ready...</div>
+          <Typography>Get ready...</Typography>
           {startDate && (
             <Countdown
-              date={Number(startDate as any)}
+              date={Number(startDate)}
               intervalDelay={0}
               precision={2}
               overtime={true}
-              renderer={({ seconds }) => <div>starting in {seconds + 1}s</div>}
+              renderer={({ seconds }) => (
+                <Typography className={styles.countdownText}>
+                  starting in <strong>{seconds + 1}</strong>s
+                </Typography>
+              )}
             />
           )}
         </React.Fragment>
       )}
-
-      <Leaderboard />
     </div>
   );
 }

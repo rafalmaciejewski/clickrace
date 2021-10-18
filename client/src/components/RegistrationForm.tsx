@@ -1,3 +1,4 @@
+import { Button, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classNames from 'classnames';
@@ -27,31 +28,33 @@ export function RegistrationForm(): JSX.Element {
     dispatch(join(name));
   }
 
-  const inputClassNames = classNames(
-    errorMessage ? [styles.input, styles.inputWithError] : styles.input,
-  );
-
   if (joined) {
-    return <div>Hello, {name}! Get ready for a race...</div>;
+    return (
+      <Typography className={styles.welcomeMessage}>
+        Hello, <strong>{name}</strong>! Get ready for a race...
+      </Typography>
+    );
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <label id="name-input">
-        Name:
-        <input
-          aria-labelledby="name-input"
-          className={inputClassNames}
-          type="text"
-          disabled={isJoining}
-          value={name}
+      <Stack spacing={1}>
+        <TextField
+          id="standard-search"
+          label="Please enter your name"
+          type="search"
+          variant="standard"
+          inputProps={{
+            maxlength: 50,
+          }}
+          autoComplete="off"
           onChange={handleInputChange}
         />
-        {errorMessage ? <span className={styles.errorMessage}>{errorMessage}</span> : null}
-      </label>
-      <button type="submit" disabled={isJoining || !!errorMessage || !name || name === ''}>
-        Join!
-      </button>
+        {errorMessage ? <div className={styles.errorMessage}>{errorMessage}</div> : null}
+        <Button type="submit" disabled={isJoining || !!errorMessage || !name || name === ''}>
+          Join!
+        </Button>
+      </Stack>
     </form>
   );
 }

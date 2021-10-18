@@ -33,8 +33,8 @@ socket.on('admin', () => {
   store.dispatch(assignAdminRole());
 });
 
-socket.on('race-initialized', ({ startDate }) => {
-  store.dispatch(raceInitialized(startDate));
+socket.on('race-initialized', (raceState) => {
+  store.dispatch(raceInitialized(raceState));
 });
 
 socket.on('race-started', () => {

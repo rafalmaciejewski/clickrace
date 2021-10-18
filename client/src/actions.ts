@@ -86,10 +86,11 @@ export function setRaceState(raceState: any): AnyAction {
   };
 }
 
-export function raceInitialized(startDate: number): AnyAction {
+export function raceInitialized({ startDate, finishDate }: any): AnyAction {
   return {
     type: RACE_INITIALIZED,
     startDate,
+    finishDate,
   };
 }
 

@@ -9,3 +9,7 @@
 .errorMessage {
   color: red;
 }
+
+.welcomeMessage {
+  text-align: center;
+}

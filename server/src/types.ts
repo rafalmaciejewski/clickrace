@@ -3,4 +3,5 @@ export type RaceStatus = {
   started: boolean;
   finished: boolean;
   startDate: number;
+  finishDate: number;
 };

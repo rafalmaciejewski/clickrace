@@ -12,8 +12,9 @@ import {
 const initialState = {
   initialized: false,
   started: false,
-  startDate: null,
   finished: false,
+  startDate: null,
+  finishDate: null,
 };
 
 export default function raceReducer(
@@ -33,6 +34,7 @@ export default function raceReducer(
         ...state,
         initialized: true,
         startDate: action.startDate,
+        finishDate: action.finishDate,
         started: false,
         finished: false,
       };
@@ -57,6 +59,7 @@ export default function raceReducer(
         initialized: false,
         started: false,
         startDate: null,
+        finishDate: null,
         finished: false,
       };
     }

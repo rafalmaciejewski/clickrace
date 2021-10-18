@@ -1,39 +1,30 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Game from '../components/Game';
-import { Leaderboard } from '../components/Leaderboard';
-import { RegistrationForm } from '../components/RegistrationForm';
+import Footer from '../components/Footer';
+import Main from '../components/Main';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => (
   <div className={styles.container}>
     <Head>
-      <title>clickrace</title>
+      <title>ClickRace!</title>
       <meta
         name="description"
-        content="Online game to determine the fastest clicker in the world"
+        content="Online game to determine the fastest clicker in the world!"
       />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="manifest" href="/site.webmanifest" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     </Head>
-
-    <main className={styles.main}>
-      <h1 className={styles.title}>ClickRace!</h1>
-
-      <p className={styles.description}>Who is the fastest clicker?</p>
-
-      <Game />
-    </main>
-
-    <footer className={styles.footer}>
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        all rights reserved of course
-      </a>
-    </footer>
+    <Main />
+    <Footer />
   </div>
 );
 
