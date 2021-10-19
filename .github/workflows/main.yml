@@ -32,4 +32,4 @@ jobs:
           environment_name: Clickrace-env
           version_label: ${{github.SHA}}
           region: eu-central-1
-          deployment_package: deploy.zip
+          deployment_package: server/deploy.zip
