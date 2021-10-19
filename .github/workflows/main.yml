@@ -21,7 +21,8 @@ jobs:
           cd ../server
           npm install
           npm run build
-          zip -r deploy.zip . -x '*.git*' -x 'node_modules/**'
+          rm -rf node_modules
+          zip -r deploy.zip . -x '*.git*'
 
       - name: Deploy
         uses: einaregilsson/beanstalk-deploy@v18
