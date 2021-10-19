@@ -9,7 +9,7 @@ import { RaceStatus } from './types';
 
 const SCORE_SYNC_INTERVAL = 500;
 const ANTI_CHEAT_INTERVAL = 2000;
-const RACE_DURATION = 60000;
+const RACE_DURATION = 40000;
 const RACE_START_TIMEOUT = 5000;
 
 @Injectable()
