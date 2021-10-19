@@ -161,7 +161,7 @@ export class AppService {
         }
         return [...result, next - cur];
       }, []);
-      if (uniq(intervals).length < 25) {
+      if (uniq(intervals).length < 15) {
         socket.emit('you-cheated');
         const playerName = this.players.get(socket);
         if (playerName) {
