@@ -7,7 +7,7 @@ import * as uniq from 'lodash.uniq';
 import { AppGateway } from './app.gateway';
 import { RaceStatus } from './types';
 
-const SCORE_SYNC_INTERVAL = 500;
+const SCORE_SYNC_INTERVAL = 700;
 const ANTI_CHEAT_INTERVAL = 2000;
 const RACE_DURATION = 40000;
 const RACE_START_TIMEOUT = 5000;
@@ -17,7 +17,7 @@ export class AppService {
   private players = new Map<Socket, string>();
   private admin: Socket = null;
   private scores = new Map<string, number>();
-  private clickTimestampsBySocket = new Map<Socket, any>();
+  private clickTimestampsBySocket = new Map<Socket, FixedArray>();
   private race: RaceStatus = {
     finished: false,
     initialized: false,
@@ -161,7 +161,7 @@ export class AppService {
         }
         return [...result, next - cur];
       }, []);
-      if (uniq(intervals).length < 4) {
+      if (uniq(intervals).length < 25) {
         socket.emit('you-cheated');
         const playerName = this.players.get(socket);
         if (playerName) {

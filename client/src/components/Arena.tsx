@@ -29,7 +29,6 @@ export default function Arena(): JSX.Element {
             date={Number(finishDate)}
             intervalDelay={0}
             precision={2}
-            overtime={true}
             renderer={({ total }) => (
               <div className={styles.timeLeft}>time left: {roundedToFixed(total / 1000, 1)}s</div>
             )}
