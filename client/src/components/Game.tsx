@@ -32,7 +32,7 @@ export default function Game(): JSX.Element {
 
   useEffect(() => {
     axios
-      .get<any>('http://localhost:3001/race')
+      .get<any>('/race')
       .then((res) => {
         dispatch(setScores(res.data.scoreboard));
         dispatch(setRaceState(res.data.race));

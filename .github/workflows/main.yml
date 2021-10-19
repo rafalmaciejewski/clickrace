@@ -1,0 +1,35 @@
+name: Deploy master
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Build and generate deployment package
+        run: |
+          cd client
+          npm install
+          npm run build
+          npm run export
+          cd ../server
+          npm install
+          npm run build
+          zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: ClickRace
+          environment_name: Clickrace-env
+          version_label: ${{github.SHA}}
+          region: eu-central-1
+          deployment_package: deploy.zip
