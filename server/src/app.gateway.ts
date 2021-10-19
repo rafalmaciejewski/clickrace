@@ -56,8 +56,8 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('click')
-  onClick(socket: Socket): void {
-    this.appService.registerClick(socket);
+  onClick(socket: Socket, timestamp: number): void {
+    this.appService.registerClick(socket, timestamp);
   }
 
   @SubscribeMessage('restart-race')

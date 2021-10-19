@@ -15,6 +15,7 @@ import {
   RESTART_RACE,
   RACE_RESTARTED,
   SET_PLAYER_LIST,
+  YOU_CHEATED,
 } from './constants/actionTypes';
 import socket from './socket';
 
@@ -118,5 +119,11 @@ export function raceFinished(scores: any): AnyAction {
 export function raceRestarted(): AnyAction {
   return {
     type: RACE_RESTARTED,
+  };
+}
+
+export function youCheated(): AnyAction {
+  return {
+    type: YOU_CHEATED,
   };
 }

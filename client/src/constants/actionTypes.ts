@@ -13,3 +13,4 @@ export const RACE_INITIALIZED = 'race-initialized';
 export const RACE_STARTED = 'race-started';
 export const RACE_FINISHED = 'race-finished';
 export const RACE_RESTARTED = 'race-restarted';
+export const YOU_CHEATED = 'you-cheated';

@@ -9,6 +9,7 @@ import {
   raceRestarted,
   raceStarted,
   setScores,
+  youCheated,
 } from './actions';
 import socket from './socket';
 import store from './store';
@@ -51,4 +52,8 @@ socket.on('race-restarted', () => {
 
 socket.on('sync-scores', (scores) => {
   store.dispatch(setScores(scores));
+});
+
+socket.on('you-cheated', () => {
+  store.dispatch(youCheated());
 });

@@ -26,7 +26,7 @@ export default function Game(): JSX.Element {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<any>(null);
-  const { isAdmin } = useSelector(getPlayer);
+  const { isAdmin, cheater } = useSelector(getPlayer);
   const { initialized } = useSelector(getRaceState);
   const playerList = useSelector(getPlayerList);
 
@@ -41,6 +41,10 @@ export default function Game(): JSX.Element {
       })
       .catch((err) => setError(err?.response?.data || err?.message || 'unknown error'));
   }, []);
+
+  if (cheater) {
+    return <div>NO CHEATING!!!</div>;
+  }
 
   if (error) {
     return <div>Error :( {error?.toString()}</div>;

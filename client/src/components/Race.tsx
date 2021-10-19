@@ -14,6 +14,27 @@ export default function Race(): JSX.Element {
   const { started, finished, startDate } = useSelector(getRaceState);
   const { isAdmin, joined } = useSelector(getPlayer);
 
+  if (!started) {
+    return (
+      <React.Fragment>
+        <Typography>Get ready...</Typography>
+        {startDate && (
+          <Countdown
+            date={Number(startDate)}
+            intervalDelay={0}
+            precision={2}
+            overtime={true}
+            renderer={({ seconds }) => (
+              <Typography className={styles.countdownText}>
+                starting in <strong>{seconds + 1}</strong>s
+              </Typography>
+            )}
+          />
+        )}
+      </React.Fragment>
+    );
+  }
+
   if (finished) {
     return (
       <div className={styles.race}>
@@ -39,29 +60,8 @@ export default function Race(): JSX.Element {
 
   return (
     <div className={styles.race}>
-      {started ? (
-        <React.Fragment>
-          <Arena />
-          <Leaderboard />
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Typography>Get ready...</Typography>
-          {startDate && (
-            <Countdown
-              date={Number(startDate)}
-              intervalDelay={0}
-              precision={2}
-              overtime={true}
-              renderer={({ seconds }) => (
-                <Typography className={styles.countdownText}>
-                  starting in <strong>{seconds + 1}</strong>s
-                </Typography>
-              )}
-            />
-          )}
-        </React.Fragment>
-      )}
+      <Arena />
+      <Leaderboard />
     </div>
   );
 }

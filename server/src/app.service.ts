@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Interval, SchedulerRegistry } from '@nestjs/schedule';
 import { Socket } from 'socket.io';
+import * as FixedArray from 'fixed-array';
+import * as uniq from 'lodash.uniq';
 import { AppGateway } from './app.gateway';
 import { RaceStatus } from './types';
 
 const SCORE_SYNC_INTERVAL = 500;
+const ANTI_CHEAT_INTERVAL = 2000;
 const RACE_DURATION = 60000;
 const RACE_START_TIMEOUT = 5000;
 
@@ -13,7 +17,7 @@ export class AppService {
   private players = new Map<Socket, string>();
   private admin: Socket = null;
   private scores = new Map<string, number>();
-  private clickTimestampsBySocket = new Map<Socket, number[]>();
+  private clickTimestampsBySocket = new Map<Socket, any>();
   private race: RaceStatus = {
     finished: false,
     initialized: false,
@@ -73,11 +77,14 @@ export class AppService {
     return [...this.players.values()].includes(playerName);
   }
 
-  registerClick(socket: Socket): void {
+  registerClick(socket: Socket, timestamp: number): void {
     if (this.race.started && !this.race.finished) {
       const playerName = this.players.get(socket);
       const score = this.scores.get(playerName) || 0;
       this.scores.set(playerName, score + 1);
+      const registeredClicks = this.clickTimestampsBySocket.get(socket) || new FixedArray(50);
+      registeredClicks.push(timestamp);
+      this.clickTimestampsBySocket.set(socket, registeredClicks);
     }
   }
 
@@ -134,6 +141,30 @@ export class AppService {
     if (this.race.started && !this.race.finished) {
       this.gateway.server.emit('sync-scores', this.getScores());
     }
+  }
+
+  @Interval(ANTI_CHEAT_INTERVAL)
+  antiCheat(): void {
+    this.clickTimestampsBySocket.forEach((timestamps, socket) => {
+      if (timestamps.length() < 50) {
+        return;
+      }
+      const intervals = timestamps.values().reduce((result, cur, idx, arr) => {
+        const next = arr[idx + 1];
+        if (!next) {
+          return result;
+        }
+        return [...result, next - cur];
+      }, []);
+      if (uniq(intervals).length < 4) {
+        socket.emit('you-cheated');
+        const playerName = this.players.get(socket);
+        if (playerName) {
+          this.scores.delete(playerName);
+        }
+        this.quit(socket);
+      }
+    });
   }
 
   getRaceStatus(): RaceStatus {

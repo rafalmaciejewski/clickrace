@@ -11,7 +11,7 @@ export default function Arena(): JSX.Element {
   const [score, setScore] = useState(0);
 
   function handleClick(): void {
-    socket.emit('click');
+    socket.emit('click', Date.now());
     setScore(score + 1);
   }
 
