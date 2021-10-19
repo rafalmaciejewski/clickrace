@@ -14,6 +14,7 @@ import {
   RACE_FINISHED,
   RESTART_RACE,
   RACE_RESTARTED,
+  SET_PLAYER_LIST,
 } from './constants/actionTypes';
 import socket from './socket';
 
@@ -35,6 +36,13 @@ export function joinFail(message: string): AnyAction {
   return {
     type: JOIN_FAIL,
     message,
+  };
+}
+
+export function setPlayerList(list: string[]): AnyAction {
+  return {
+    type: SET_PLAYER_LIST,
+    payload: list,
   };
 }
 

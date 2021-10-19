@@ -7,9 +7,14 @@
     align-items: center;
 }
 
-.footer a {
+.footer img {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+}
+
+.logo {
+    width: 26px;
+    height: 26px;
 }

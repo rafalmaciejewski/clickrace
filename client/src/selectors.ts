@@ -9,3 +9,5 @@ export const getPlayerNames = (state: AppState): string[] => Object.keys(state.s
 export const getRaceState = (state: AppState) => state.race;
 
 export const getPlayer = (state: AppState) => state.player;
+
+export const getPlayerList = (state: AppState): string[] => [...state.playerList];

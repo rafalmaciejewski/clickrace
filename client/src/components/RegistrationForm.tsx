@@ -1,7 +1,6 @@
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import classNames from 'classnames';
 import { join } from '../actions';
 import { getPlayer, getPlayerNames } from '../selectors';
 import styles from './RegistrationForm.module.css';
@@ -45,7 +44,7 @@ export function RegistrationForm(): JSX.Element {
           type="search"
           variant="standard"
           inputProps={{
-            maxlength: 50,
+            maxLength: 50,
           }}
           autoComplete="off"
           onChange={handleInputChange}

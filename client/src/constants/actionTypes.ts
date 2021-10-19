@@ -1,5 +1,6 @@
 export const JOIN = 'join';
 export const JOINED = 'joined';
+export const SET_PLAYER_LIST = 'set-player-list';
 export const PLAYER_JOINED = 'player-joined';
 export const PLAYER_QUIT = 'player-quit';
 export const ASSIGN_ADMIN_ROLE = 'assign-admin-role';
