@@ -1,5 +1,12 @@
 import { AnyAction } from 'redux';
-import { ASSIGN_ADMIN_ROLE, JOIN, JOIN_FAIL, JOINED, YOU_CHEATED } from '../constants/actionTypes';
+import {
+  ASSIGN_ADMIN_ROLE,
+  JOIN,
+  JOIN_FAIL,
+  JOINED,
+  WITHDRAW_ADMIN_ROLE,
+  YOU_CHEATED,
+} from '../constants/actionTypes';
 
 const initialState = {
   name: '',
@@ -18,6 +25,12 @@ export default function playerReducer(
       return {
         ...state,
         isAdmin: true,
+      };
+    }
+    case WITHDRAW_ADMIN_ROLE: {
+      return {
+        ...state,
+        isAdmin: false,
       };
     }
     case JOIN: {

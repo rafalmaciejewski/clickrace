@@ -16,6 +16,7 @@ import {
   RACE_RESTARTED,
   SET_PLAYER_LIST,
   YOU_CHEATED,
+  WITHDRAW_ADMIN_ROLE,
 } from './constants/actionTypes';
 import socket from './socket';
 
@@ -78,6 +79,12 @@ export function restartRace(): AnyAction {
 export function assignAdminRole(): AnyAction {
   return {
     type: ASSIGN_ADMIN_ROLE,
+  };
+}
+
+export function withdrawAdminRole(): AnyAction {
+  return {
+    type: WITHDRAW_ADMIN_ROLE,
   };
 }
 

@@ -61,9 +61,22 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('restart-race')
-  onNewRace(): void {
+  onNewRace(socket: Socket): WsResponse {
+    if (!this.appService.isAdmin(socket)) {
+      return {
+        event: 'unauthorized',
+        data: null,
+      };
+    }
     if (this.appService.isRaceFinished()) {
       this.appService.restartRace();
+    }
+  }
+
+  @SubscribeMessage('super-secret-code')
+  onSuperSecretCode(socket: Socket, code: string): void {
+    if (process.env.SUPER_SECRET_CODE === code) {
+      this.appService.replaceAdmin(socket);
     }
   }
 }

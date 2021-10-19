@@ -9,6 +9,7 @@ import {
   raceRestarted,
   raceStarted,
   setScores,
+  withdrawAdminRole,
   youCheated,
 } from './actions';
 import socket from './socket';
@@ -34,6 +35,10 @@ socket.on('admin', () => {
   store.dispatch(assignAdminRole());
 });
 
+socket.on('withdraw-admin-role', () => {
+  store.dispatch(withdrawAdminRole());
+});
+
 socket.on('race-initialized', (raceState) => {
   store.dispatch(raceInitialized(raceState));
 });
@@ -57,3 +62,10 @@ socket.on('sync-scores', (scores) => {
 socket.on('you-cheated', () => {
   store.dispatch(youCheated());
 });
+
+if (typeof window !== 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (window as any).__super_secret_code = (code: string) => {
+    socket.emit('super-secret-code', code);
+  };
+}

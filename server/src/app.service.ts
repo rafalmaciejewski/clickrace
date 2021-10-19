@@ -65,6 +65,11 @@ export class AppService {
     socket.emit('admin');
   }
 
+  replaceAdmin(socket: Socket): void {
+    this.admin.emit('withdraw-admin-role');
+    this.setAdmin(socket);
+  }
+
   isAdmin(socket: Socket): boolean {
     return this.admin === socket;
   }

@@ -4,6 +4,7 @@ export const SET_PLAYER_LIST = 'set-player-list';
 export const PLAYER_JOINED = 'player-joined';
 export const PLAYER_QUIT = 'player-quit';
 export const ASSIGN_ADMIN_ROLE = 'assign-admin-role';
+export const WITHDRAW_ADMIN_ROLE = 'withdraw-admin-role';
 export const START_RACE = 'start-race';
 export const RESTART_RACE = 'restart-race';
 export const JOIN_FAIL = 'join-fail';
