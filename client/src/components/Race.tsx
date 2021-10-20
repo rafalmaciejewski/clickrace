@@ -23,10 +23,15 @@ export default function Race(): JSX.Element {
             date={Number(startDate)}
             intervalDelay={0}
             precision={2}
-            overtime={true}
-            renderer={({ seconds }) => (
+            renderer={({ completed, seconds }) => (
               <Typography className={styles.countdownText}>
-                starting in <strong>{seconds + 1}</strong>s
+                {completed ? (
+                  <span>starting now!</span>
+                ) : (
+                  <span>
+                    starting in <strong>{seconds + 1}</strong>
+                  </span>
+                )}
               </Typography>
             )}
           />
