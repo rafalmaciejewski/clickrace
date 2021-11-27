@@ -10,24 +10,24 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.4",
-    "@mui/material": "^5.0.4",
-    "axios": "0.23.0",
+    "@emotion/react": "11.7.0",
+    "@emotion/styled": "11.6.0",
+    "@mui/icons-material": "5.2.0",
+    "@mui/material": "5.2.1",
+    "axios": "0.24.0",
     "classnames": "2.3.1",
-    "next": "11.1.2",
+    "next": "12.0.4",
     "react": "17.0.2",
     "react-countdown": "2.3.2",
     "react-dom": "17.0.2",
-    "react-redux": "7.2.5",
-    "redux": "4.1.1",
+    "react-redux": "7.2.6",
+    "redux": "4.1.2",
     "redux-logger": "3.0.6",
-    "socket.io-client": "4.3.2"
+    "socket.io-client": "4.4.0"
   },
   "devDependencies": {
-    "@types/react": "17.0.30",
+    "@types/react": "17.0.37",
     "@types/redux-logger": "3.0.9",
-    "typescript": "4.4.4"
+    "typescript": "4.5.2"
   }
 }

@@ -1,0 +1,5 @@
+services:
+  clickrace:
+    build: .
+    ports:
+      - "8088:8088"
